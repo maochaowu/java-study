@@ -9,6 +9,7 @@
 
   <modules>
     <module>lock-study</module>
+      <module>io-study</module>
   </modules>
 
   <name>study</name>
