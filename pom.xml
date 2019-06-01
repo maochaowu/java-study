@@ -10,6 +10,8 @@
   <modules>
     <module>lock-study</module>
       <module>io-study</module>
+      <module>mybatis-study</module>
+      <module>base-study</module>
   </modules>
 
   <name>study</name>

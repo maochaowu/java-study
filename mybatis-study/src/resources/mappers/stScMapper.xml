@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mcw.cora.mybatis.mapper.StScMapper">
+
+    <insert id="insert" parameterType="stSc">
+        insert into st_sc (st_id,sc_id,score) values (
+        #{stId,jdbcType=INTEGER},
+        #{scId,jdbcType=INTEGER},
+        #{score,jdbcType=INTEGER}
+        )
+    </insert>
+
+</mapper>

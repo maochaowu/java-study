@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mcw.cora.mybatis.mapper.StudentMapper">
+
+    <insert id="insert" parameterType="student">
+        insert into student (student_name,student_age) values (
+        #{studentName,jdbcType=VARCHAR},
+        #{studentAge,jdbcType=INTEGER}
+        )
+    </insert>
+
+</mapper>
