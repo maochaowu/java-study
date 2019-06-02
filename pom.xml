@@ -12,6 +12,7 @@
       <module>io-study</module>
       <module>mybatis-study</module>
       <module>base-study</module>
+      <module>redis-study</module>
   </modules>
 
   <name>study</name>
