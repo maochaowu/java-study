@@ -13,7 +13,7 @@ import java.util.Set;
  * Date 2019/6/2 21:22
  * Version 1.0
  **/
-public class RedisSentinelTest {
+public class SentinelRedisTest {
 
     public static void main(String[] args) {
         Set<String> sentinelConfig = new HashSet<>();
