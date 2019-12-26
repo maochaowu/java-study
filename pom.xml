@@ -13,6 +13,12 @@
       <module>mybatis-study</module>
       <module>base-study</module>
       <module>redis-study</module>
+      <module>other-study</module>
+      <module>spring-study</module>
+      <module>springboot-study</module>
+      <module>gc-study</module>
+      <module>log-study</module>
+    <module>springmvc-study</module>
   </modules>
 
   <name>study</name>
@@ -24,7 +30,4 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <spring.version>4.3.17.RELEASE</spring.version>
   </properties>
-
-  <dependencies>
-  </dependencies>
 </project>

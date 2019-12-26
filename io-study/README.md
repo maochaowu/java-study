@@ -6,7 +6,7 @@
 
 ## 1.同步阻塞io
 
-参考代码示例：com.mcw.cora.net.io.bio.SyncBlockServer
+参考代码示例：SyncBlockServer
 
 流程说明：服务端接收一个连接，处理完成之后，在接收下一个连接，目前这种方式基本上没人使用。
 
@@ -14,7 +14,7 @@
 
 ## 2.异步阻塞io
 
-参考代码示例：com.mcw.cora.net.io.bio.ASyncBlockServer
+参考代码示例：ASyncBlockServer
 
 流程说明：服务端接收一个连接，然后创建一个线程来处理这个socket信息，处理完关闭。
 
@@ -24,7 +24,7 @@
 
 ## 1.异步阻塞io
 
-参考代码示例：com.mcw.cora.net.io.nio.NioBlockServer
+参考代码示例：NioBlockServer
 
 流程说明：通过创建多路复用器Selector，然后将ServerSocketChannel和SocketChannel注册到Selector中，注册时，需要指定channel感兴趣的事件，比如ServerSocketChannel的OP_ACCEPT(即连接请求)，SocketChannel的OP_READ(即读请求)。然后执行Selector的select方法(有相应的重载方法)，当注册其中的Channel有感兴趣的事件就绪时，通过Selector的selectedKeys方法可以获取到就绪的事件，然后对继续的事件进行处理。
 
@@ -38,7 +38,7 @@
 
 ## 1.异步非阻塞io
 
-参考代码示例：com.mcw.cora.net.io.aio.AioNonBlockServer
+参考代码示例：AioNonBlockServer
 
 流程说明：AIO采用事件通知机制，通过不断的循环注册事件实现连接、数据的读取操作。
 

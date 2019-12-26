@@ -16,7 +16,7 @@ public class SyncBlockClient {
     private static final Random random = new Random();
 
     public static void main(String[] args) {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 1; i++) {
             Thread tt = new Thread(() -> {
                 try {
                     Thread.sleep(random.nextInt(6) * 1000);
@@ -32,10 +32,15 @@ public class SyncBlockClient {
             });
             tt.start();
         }
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static byte[] makeData() {
-        String data = "hello my name is java god";
+        String data = "hello my name is java god11";
         return data.getBytes();
     }
 }

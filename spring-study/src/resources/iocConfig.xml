@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-4.0.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+    <bean id="aspectBean" class="com.mcw.cora.spring.xml.config.AspectBean"></bean>
+
+    <bean id="aopDemo" class="com.mcw.cora.spring.xml.config.aop.AopDemo"></bean>
+
+    <bean id="introductionDemo" class="com.mcw.cora.spring.xml.config.aop.IntroductionDemo"></bean>
+
+    <aop:config>
+        <aop:pointcut id="aopPoint"
+                      expression="execution( * com.mcw.cora.spring.xml.config.aop.*.*())"></aop:pointcut>
+
+        <aop:aspect id="aopAspect" ref="aspectBean">
+            <aop:before method="before" pointcut-ref="aopPoint"></aop:before>
+            <aop:around method="around" pointcut-ref="aopPoint"></aop:around>
+        </aop:aspect>
+    </aop:config>
+</beans>

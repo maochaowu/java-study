@@ -28,6 +28,12 @@ shardedJedis.set("hello","world");
 
 ## 3.采用sentinel模式使用
 
+sentinel模式下，客户连接池连接的是sentinel的端口，sentinel会自动获取到集群中的master节点，供客户端进行连接，sentinel顾名思义即哨兵，redis-server在启动后，都会注册到sentinel中，sentinel集群负责管理redis的集群，主要用于redis集群的master和salve的选举。（有可能出现脑裂的情况）。
+
+优点：采用sentinel集群模式可以方便管理redis集群，当redis集群master节点挂掉后，可以通过投票从slave中选举出新的节点做为master节点。
+
+缺点：可能出现脑裂的情况，导致数据丢失。
+
 ```java
 Set<String> sentinelConfig = new HashSet<>();
 sentinelConfig.add(new HostAndPort("192.168.200.150", 26379).toString());
@@ -37,9 +43,16 @@ Jedis master = sentinelPool.getResource();
 master.set("hello","world");
 ```
 
-
-
 ## 4.采用cluster模式使用
+
+采用cluster模式进行部署时，是完全去中心化的部署方式，所有的redis节点通过点对点的方式进行通信，集群中的节点存储在nodes.conf文件中。在集群部署模式下，redis集群将整个集群分成了16383个slot。如下为6个节点的集群，三主三从（可以看到第一个主节点占据的是0-5460的slot、第二个主节点占据的是5461-10922的slot、第三个主节点占据的是10923-16383），当进行写入和查找时，通过key的hash对16383取模，即可获得数据需要存储在那个slot中，进而知道在那个节点中进行处理。
+
+b94cb16571560c023910daad7e0ac9d6b85dfd20 192.168.200.137:7000@17000 master - 0 1559737840539 1 connected 0-5460
+57952c92477771eec02d803fe8f0f75aad566d9e 192.168.200.137:7002@17002 master - 0 1559737840000 3 connected 10923-16383
+c1428c60af3b7bc912919498ec6ad0e92daa1077 192.168.200.137:7005@17005 slave 57952c92477771eec02d803fe8f0f75aad566d9e 0 1559737839000 6 connected
+4c2b0c8520e0e113fb97d03354a08fe960190c08 192.168.200.137:7004@17004 slave f08d3fc6b8177fa78f18972ba538b829b9945fc5 0 1559737841000 5 connected
+813f327ef687084d672d37753f5c7b99f46b6b95 192.168.200.137:7003@17003 slave b94cb16571560c023910daad7e0ac9d6b85dfd20 0 1559737841545 4 connected
+f08d3fc6b8177fa78f18972ba538b829b9945fc5 192.168.200.137:7001@17001 myself,master - 0 1559737838000 2 connected 5461-10922
 
 ```java
 JedisCluster cluster = new JedisCluster(new HostAndPort("192.168.200.137", 7000));
